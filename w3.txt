@@ -1,0 +1,58 @@
+
+int ledpin=8;
+int buttonpin=7;
+int last_state=HIGH;
+void setup() {
+  Serial.begin(115200);
+  pinMode(buttonpin, INPUT_PULLUP);
+  pinMode(ledpin, OUTPUT);
+}
+
+void loop() {
+  int value=digitalRead(buttonpin);
+  if(last_state != value){
+    last_state=value;
+    if(value==HIGH){
+      digitalWrite(ledpin, LOW);
+      Serial.println("Released");
+    }
+    else{
+      digitalWrite(ledpin, HIGH);
+      Serial.println("Pressed");
+    }
+  }
+}
+
+diagram.json
+
+{
+  "version": 1,
+  "author": "Veera",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-arduino-uno", "id": "uno", "top": 39, "left": 66.6, "attrs": {} },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": -22.6,
+      "left": 268.8,
+      "attrs": { "color": "green" }
+    },
+    { "type": "wokwi-led", "id": "led1", "top": -99.6, "left": 215, "attrs": { "color": "red" } },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": -15.25,
+      "left": 86.4,
+      "attrs": { "value": "220" }
+    }
+  ],
+  "connections": [
+    [ "led1:A", "uno:8", "green", [ "v57.6", "h-5.67" ] ],
+    [ "led1:C", "r1:2", "green", [ "v0" ] ],
+    [ "r1:1", "uno:GND.1", "green", [ "v0" ] ],
+    [ "btn1:2.l", "uno:GND.1", "green", [ "h0" ] ],
+    [ "btn1:1.r", "uno:7", "green", [ "v38.4", "h-147.4" ] ]
+  ],
+  "dependencies": {}
+}

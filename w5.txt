@@ -1,0 +1,77 @@
+
+#include <Servo.h>
+int buttonpin=7;
+int last_state=HIGH;
+int relaypin=8;
+Servo myservo;
+int pos=0;
+void setup() {
+  Serial.begin(115200);
+  pinMode(buttonpin,INPUT_PULLUP);
+  pinMode(relaypin,OUTPUT);
+  myservo.attach(9);
+}
+
+void loop() {
+  int value=digitalRead(buttonpin);
+  if(last_state!=value)
+  {
+    last_state=value;
+    if(value==HIGH)
+    {
+      digitalWrite(relaypin,LOW);
+      Serial.println("released");
+      for (pos=70;pos<=100;pos+=1)
+      {
+        myservo.write(pos);
+        delay(15);
+      }
+      for (pos=100;pos>=70;pos-=1)
+      {
+        myservo.write(pos);
+        delay(15);
+      }
+    }
+    else
+    {
+      digitalWrite(relaypin,HIGH);
+      Serial.println("pressed");
+    }
+  } 
+}
+
+diagram.json
+
+{
+  "version": 1,
+  "author": "Veera",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-arduino-uno", "id": "uno", "top": -0.8, "left": -12.04, "attrs": {} },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": -95.33,
+      "left": -135.16,
+      "attrs": { "color": "green" }
+    },
+    { "type": "wokwi-relay-module", "id": "relay1", "top": -92.79, "left": 163.26, "attrs": {} },
+    { "type": "wokwi-servo", "id": "servo1", "top": -138.23, "left": 331.37, "attrs": {} },
+    { "type": "wokwi-vcc", "id": "vcc1", "top": -161.37, "left": 286.47, "attrs": {} }
+  ],
+  "connections": [
+    [ "relay1:VCC", "uno:5V", "red", [ "h0" ] ],
+    [ "relay1:GND", "uno:GND.1", "black", [ "h0" ] ],
+    [ "relay1:IN", "uno:8", "green", [ "h0" ] ],
+    [ "servo1:GND", "uno:GND.2", "black", [ "h-23.56", "v301.93", "h-146.31" ] ],
+    [ "servo1:V+", "relay1:NC", "green", [ "h0" ] ],
+    [ "relay1:COM", "vcc1:VCC", "green", [ "h0" ] ],
+    [ "servo1:PWM", "uno:9", "green", [ "h-16.51", "v58.17", "h-165.7" ] ],
+    [ "btn1:2.r", "uno:GND.3", "green", [ "h36.1", "v298.12", "h199.56" ] ],
+    [ "btn1:1.r", "uno:7", "green", [ "v3.17", "h152.11", "v55.98", "h119.25" ] ]
+  ],
+  "dependencies": {}
+}
+
+libraries
+Servo

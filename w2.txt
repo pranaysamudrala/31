@@ -1,0 +1,36 @@
+
+void setup() {
+  pinMode(13, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(13, HIGH);
+  delay(1000);
+  digitalWrite(13, LOW);
+  delay(2000);
+}
+
+diagram.json:
+
+{
+  "version": 1,
+  "author": "Veera",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-arduino-uno", "id": "uno", "top": 36, "left": 1.33, "attrs": {} },
+    { "type": "wokwi-led", "id": "led1", "top": -80.4, "left": 99.8, "attrs": { "color": "red" } },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": -5.65,
+      "left": 38.4,
+      "attrs": { "value": "220" }
+    }
+  ],
+  "connections": [
+    [ "led1:C", "r1:1", "green", [ "v13.59", "h110.73" ] ],
+    [ "led1:A", "uno:13", "green", [ "v0" ] ],
+    [ "r1:2", "uno:GND.1", "green", [ "h18", "v45" ] ]
+  ],
+  "dependencies": {}
+}
