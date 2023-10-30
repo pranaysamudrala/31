@@ -4,13 +4,12 @@
 #define DHTTYPE DHT22
 DHT dht(DHTPIN, DHTTYPE);
 void setup() {
-  // put your setup code here, to run once:
   Serial.begin(9600);
   Serial.println(F("DHTxxtest!!"));
   dht.begin();
+  pinMode(12, OUTPUT);
 }
 void loop() {
-  // put your main code here, to run repeatedly:
   delay(1000);
   float h= dht.readHumidity();
   float t= dht.readTemperature();
@@ -26,6 +25,12 @@ void loop() {
   Serial.println(F("\nTemperature:"));
   Serial.print(t);
   Serial.print("C");
+  if(t>50 && h>70){
+    digitalWrite(12, HIGH);
+    delay(200);
+    digitalWrite(12, LOW);
+    delay(200);
+  }
 }
 
 diagram.json
@@ -36,12 +41,29 @@ diagram.json
   "editor": "wokwi",
   "parts": [
     { "type": "wokwi-arduino-uno", "id": "uno", "top": -5.21, "left": -90.1, "attrs": {} },
-    { "type": "wokwi-dht22", "id": "dht1", "top": -153.3, "left": 13.8, "attrs": {} }
+    { "type": "wokwi-dht22", "id": "dht1", "top": -153.3, "left": 13.8, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": -147.09,
+      "left": 114.33,
+      "attrs": { "color": "red" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": -30.73,
+      "left": 70.36,
+      "attrs": { "value": "220" }
+    }
   ],
   "connections": [
     [ "dht1:GND", "uno:GND.1", "black", [ "v0" ] ],
     [ "dht1:VCC", "uno:5V", "red", [ "v0" ] ],
-    [ "dht1:SDA", "uno:2", "green", [ "v0" ] ]
+    [ "dht1:SDA", "uno:2", "green", [ "v0" ] ],
+    [ "led1:A", "uno:12", "green", [ "v0" ] ],
+    [ "led1:C", "r1:2", "green", [ "v80.27", "h0.33" ] ],
+    [ "uno:GND.1", "r1:1", "black", [ "v0" ] ]
   ],
   "dependencies": {}
 }

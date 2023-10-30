@@ -43,12 +43,12 @@
 </head>
 <body>
 
-  <button class="show-button" onclick="showText('text-file-1')">1 Bulb(W2)</button>
-  <button class="show-button" onclick="showText('text-file-2')">Push Button(W3)</button>
-  <button class="show-button" onclick="showText('text-file-3')">DHT(W4)</button>
-  <button class="show-button" onclick="showText('text-file-4')">Servo(W5)</button>
-  <button class="show-button" onclick="showText('text-file-5')">LCD(W6)</button>
-
+  <button class="show-button" onclick="showText('text-file-1')">S1 Bulb(2s)</button>
+  <button class="show-button" onclick="showText('text-file-2')">S2 Push Button(W3)</button>
+  <button class="show-button" onclick="showText('text-file-3')">S3 DHT(W4)</button>
+  <button class="show-button" onclick="showText('text-file-4')">S4 Relay/Motor(W5)</button>
+  <button class="show-button" onclick="showText('text-file-5')">S5 DHT+LED(W4)</button>
+  <button class="show-button" onclick="showText('text-file-6')">LCD(W6)</button>
   <!-- Add more buttons for other text files -->
 
   <div class="code-snippet" id="text-file-1">
@@ -104,63 +104,6 @@
       </code>
     </pre>
   </div>
-
-  <div class="code-snippet" id="text-file-7">
-    <button class="copy-button" onclick="copyToClipboard('text-file-7')">Copy Text</button>
-    <pre>
-      <code id="text-file-7-content">
-        <!-- Content will be dynamically populated here -->
-      </code>
-    </pre>
-  </div>
-
-  <div class="code-snippet" id="text-file-8">
-    <button class="copy-button" onclick="copyToClipboard('text-file-8')">Copy Text</button>
-    <pre>
-      <code id="text-file-8-content">
-        <!-- Content will be dynamically populated here -->
-      </code>
-    </pre>
-  </div>
-
-  <div class="code-snippet" id="text-file-9">
-    <button class="copy-button" onclick="copyToClipboard('text-file-9')">Copy Text</button>
-    <pre>
-      <code id="text-file-9-content">
-        <!-- Content will be dynamically populated here -->
-      </code>
-    </pre>
-  </div>
-
-  <div class="code-snippet" id="text-file-10">
-    <button class="copy-button" onclick="copyToClipboard('text-file-10')">Copy Text</button>
-    <pre>
-      <code id="text-file-10-content">
-        <!-- Content will be dynamically populated here -->
-      </code>
-    </pre>
-  </div>
-
-  <div class="code-snippet" id="text-file-11">
-    <button class="copy-button" onclick="copyToClipboard('text-file-11')">Copy Text</button>
-    <pre>
-      <code id="text-file-11-content">
-        <!-- Content will be dynamically populated here -->
-      </code>
-    </pre>
-  </div>
-
-  <div class="code-snippet" id="text-file-12">
-    <button class="copy-button" onclick="copyToClipboard('text-file-12')">Copy Text</button>
-    <pre>
-      <code id="text-file-12-content">
-        <!-- Content will be dynamically populated here -->
-      </code>
-    </pre>
-  </div>
-  <!-- Add more divs for other text files -->
-
-
   <script>
     function showText(elementId) {
       // Get all the text file snippets
@@ -206,7 +149,8 @@
     fetchTextFile('text-file-2', 'w3.txt');
     fetchTextFile('text-file-3', 'w4.txt');
     fetchTextFile('text-file-4', 'w5.txt');    
-    fetchTextFile('text-file-5', 'w6.txt');
+    fetchTextFile('text-file-5', 'w42.txt');
+    fetchTextFile('text-file-6', 'w6.txt');
     // Add more fetchTextFile calls for other text files
 
     function fetchTextFile(elementId, filePath) {
